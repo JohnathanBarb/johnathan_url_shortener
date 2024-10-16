@@ -6,8 +6,10 @@ shorten_url_router = APIRouter(
     tags=["url"],
 )
 
+
 class URLToShorten(BaseModel):
     url: str
+
 
 @shorten_url_router.post("/")
 def shorten_url(url_to_short: URLToShorten):
