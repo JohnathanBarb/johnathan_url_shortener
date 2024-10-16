@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "johnathan-url-shortener"
+version = "0.1.0"
+description = ""
+authors = ["Johnathan Barbosa <jbarbosa0504@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+
+[tool.poetry.dependencies]
+python = "^3.13"
+fastapi = {extras = ["standard"], version = "^0.115.2"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
