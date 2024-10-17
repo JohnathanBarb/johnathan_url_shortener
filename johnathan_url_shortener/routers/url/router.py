@@ -10,18 +10,18 @@ from johnathan_url_shortener.services.url.get import (
 )
 from johnathan_url_shortener.services.url.register import register_url
 
-shorten_url_router = APIRouter(
-    prefix="/url",
-    tags=["url"],
-)
+shorten_url_router = APIRouter(prefix="/url")
 
 
 class URLToShorten(BaseModel):
     url: str
 
 
-@shorten_url_router.post("/")
-def shorten_url(url_to_short: URLToShorten):
+@shorten_url_router.post(
+    "/",
+    description="Register a shortened URL.",
+)
+def register_shortened_url(url_to_short: URLToShorten):
     token = register_url(
         InMemoryShortenedURLRepositoryImpl(),
         url_to_short.url,
@@ -29,7 +29,10 @@ def shorten_url(url_to_short: URLToShorten):
     return {"token": token}
 
 
-@shorten_url_router.get("/{token_url}")
+@shorten_url_router.get(
+    "/{token_url}",
+    description="Get a shortened URL.",
+)
 def get_url(token_url: str):
     try:
 
