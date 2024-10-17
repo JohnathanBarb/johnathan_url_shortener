@@ -17,7 +17,7 @@ class IShortenedURLRepository(ABC):
 my_database: Dict[str, str] = {}
 
 
-class ShortenedURLRepositoryImpl(IShortenedURLRepository):
+class InMemoryShortenedURLRepositoryImpl(IShortenedURLRepository):
     def register(self, shortened_url: str) -> str:
         # generate a token to be identifier to shortened url
 
