@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict
+from typing import Dict, Optional
 
 from johnathan_url_shortener.utils import generate_token
 
@@ -10,7 +10,7 @@ class IShortenedURLRepository(ABC):
         raise NotImplementedError()
 
     @abstractmethod
-    def get(self, url_token: str) -> str:
+    def get(self, url_token: str) -> Optional[str]:
         raise NotImplementedError()
 
 
@@ -26,5 +26,5 @@ class InMemoryShortenedURLRepositoryImpl(IShortenedURLRepository):
 
         return token_shortened_url
 
-    def get(self, url_token: str) -> str:
-        return my_database.get(url_token, "NOT-FOUND")
+    def get(self, url_token: str) -> Optional[str]:
+        return my_database.get(url_token)
