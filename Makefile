@@ -4,5 +4,14 @@ run:
 test:
 	poetry run pytest -s
 
+utest:
+	poetry run pytest -s tests/unit
+
+itest:
+	poetry run pytest -s tests/integration
+
+etest:
+	poetry run pytest -s tests/e2e
+
 format:
 	poetry run black .
