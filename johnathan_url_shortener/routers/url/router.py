@@ -1,9 +1,13 @@
-from fastapi import APIRouter, HTTPException
+from typing import Annotated
+
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
 from johnathan_url_shortener.adapters.repositories.url import (
     InMemoryShortenedURLRepositoryImpl,
 )
+from johnathan_url_shortener.dependencies import get_dbsession
 from johnathan_url_shortener.services.unit_of_work import (
     IUnitOfWork,
     SqlAlchemyUnitOfWork,
@@ -25,9 +29,11 @@ class URLToShorten(BaseModel):
     "/",
     description="Register a shortened URL.",
 )
-def register_shortened_url(url_to_short: URLToShorten):
+def register_shortened_url(
+    url_to_short: URLToShorten, session: Annotated[Session, Depends(get_dbsession)]
+):
     token = register_url(
-        SqlAlchemyUnitOfWork(),
+        SqlAlchemyUnitOfWork(session_factory=session),
         url_to_short.url,
     )
     return {"token": token}
@@ -37,11 +43,14 @@ def register_shortened_url(url_to_short: URLToShorten):
     "/{token_url}",
     description="Get a shortened URL.",
 )
-def get_url(token_url: str):
+def get_url(
+    token_url: str,
+    session: Annotated[Session, Depends(get_dbsession)],
+):
     try:
 
         url = get_shortened_url(
-            SqlAlchemyUnitOfWork(),
+            SqlAlchemyUnitOfWork(session_factory=session),
             token_url,
         )
         return {"url": url}

@@ -28,12 +28,8 @@ class IUnitOfWork(ABC):
         raise NotImplementedError()
 
 
-engine = create_engine(get_settings().db_url, echo=True)
-DEFAULT_SESSION_FACTORY = sessionmaker(bind=engine)
-
-
 class SqlAlchemyUnitOfWork(IUnitOfWork):
-    def __init__(self, session_factory=DEFAULT_SESSION_FACTORY):
+    def __init__(self, session_factory):
         self.session_factory = session_factory
 
     def __enter__(self):
