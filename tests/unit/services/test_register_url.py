@@ -1,12 +1,14 @@
 from johnathan_url_shortener.services.url.register import register_url
-from tests.utils.repositories.url import TShortenedURLRepositoryImpl
+from tests.utils.unit_of_work import TUnitOfWork
 
 
 def test_register_url():
 
     url = "https://my-test-url.com"
 
-    test_url_repository = TShortenedURLRepositoryImpl()
-    token = register_url(test_url_repository, url)
+    uow = TUnitOfWork()
 
-    assert test_url_repository.INTERNAL_STORAGE[token] == url
+    url_repository = uow.urls
+    token = register_url(uow, url)
+
+    assert url_repository.INTERNAL_STORAGE[token] == url
