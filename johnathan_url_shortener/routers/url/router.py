@@ -4,7 +4,10 @@ from pydantic import BaseModel
 from johnathan_url_shortener.adapters.repositories.url import (
     InMemoryShortenedURLRepositoryImpl,
 )
-from johnathan_url_shortener.services.unit_of_work import IUnitOfWork, SqlAlchemyUnitOfWork
+from johnathan_url_shortener.services.unit_of_work import (
+    IUnitOfWork,
+    SqlAlchemyUnitOfWork,
+)
 from johnathan_url_shortener.services.url.get import (
     get_shortened_url,
     NotFoundShortenedUrlException,

@@ -11,14 +11,14 @@ def test_get_url():
 
     token_url = "token_url"
     url = "https://my-test-url.com"
-    
+
     uow = TUnitOfWork()
 
     test_url_repository = uow.urls
     test_url_repository.INTERNAL_STORAGE[token_url] = url
 
     returned_url = get_shortened_url(TUnitOfWork(), token_url)
-    
+
     assert returned_url == url
 
 

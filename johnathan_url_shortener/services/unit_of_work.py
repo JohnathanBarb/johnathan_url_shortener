@@ -4,22 +4,25 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from johnathan_url_shortener.config import get_settings
-from johnathan_url_shortener.adapters.repositories.url import IShortenedURLRepository, InMemoryShortenedURLRepositoryImpl
+from johnathan_url_shortener.adapters.repositories.url import (
+    IShortenedURLRepository,
+    InMemoryShortenedURLRepositoryImpl,
+)
 
 
 class IUnitOfWork(ABC):
     urls: IShortenedURLRepository
-    
+
     def __enter__(self) -> "IUnitOfWork":
         return self
 
     def __exit__(self, *args):
         self.rollback()
-    
+
     @abstractmethod
     def commit(self):
         raise NotImplementedError()
-    
+
     @abstractmethod
     def rollback(self):
         raise NotImplementedError()
@@ -27,6 +30,7 @@ class IUnitOfWork(ABC):
 
 engine = create_engine(get_settings().db_url, echo=True)
 DEFAULT_SESSION_FACTORY = sessionmaker(bind=engine)
+
 
 class SqlAlchemyUnitOfWork(IUnitOfWork):
     def __init__(self, session_factory=DEFAULT_SESSION_FACTORY):
@@ -43,6 +47,6 @@ class SqlAlchemyUnitOfWork(IUnitOfWork):
 
     def commit(self):
         self.session.commit()
-    
+
     def rollback(self):
         self.session.rollback()
