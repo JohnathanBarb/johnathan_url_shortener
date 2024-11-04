@@ -21,3 +21,6 @@ etest:
 
 format:
 	poetry run black .
+
+migrate:
+	poetry run alembic upgrade head

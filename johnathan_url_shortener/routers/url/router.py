@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from johnathan_url_shortener.adapters.repositories.url import (
-    InMemoryShortenedURLRepositoryImpl,
+    SQLAlchemyShortenedURLRepositoryImpl,
 )
 from johnathan_url_shortener.dependencies import get_dbsession
 from johnathan_url_shortener.services.unit_of_work import (

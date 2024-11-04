@@ -32,3 +32,8 @@ make test
 ```shell
 make format
 ```
+
+- To generate migrations
+```shell
+alembic revision --autogenerate -m "YOUR MESSAGE DESCRIBING HERE" 
+```

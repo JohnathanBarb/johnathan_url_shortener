@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from johnathan_url_shortener.config import get_settings
 from johnathan_url_shortener.adapters.repositories.url import (
     IShortenedURLRepository,
-    InMemoryShortenedURLRepositoryImpl,
+    SQLAlchemyShortenedURLRepositoryImpl,
 )
 
 
@@ -34,7 +34,7 @@ class SqlAlchemyUnitOfWork(IUnitOfWork):
 
     def __enter__(self):
         self.session = self.session_factory()
-        self.urls = InMemoryShortenedURLRepositoryImpl()
+        self.urls = SQLAlchemyShortenedURLRepositoryImpl(self.session)
         return super().__enter__()
 
     def __exit__(self, *args):

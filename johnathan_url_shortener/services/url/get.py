@@ -1,4 +1,3 @@
-from johnathan_url_shortener.adapters.repositories.url import IShortenedURLRepository
 from johnathan_url_shortener.services.unit_of_work import IUnitOfWork
 
 
