@@ -1,6 +1,9 @@
 run:
 	poetry run fastapi dev johnathan_url_shortener/main.py
 
+build:
+	docker build -t jus .
+
 up:
 	docker compose up -d
 

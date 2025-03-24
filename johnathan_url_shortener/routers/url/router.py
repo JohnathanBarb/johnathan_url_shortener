@@ -4,12 +4,8 @@ from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from johnathan_url_shortener.adapters.repositories.url import (
-    SQLAlchemyShortenedURLRepositoryImpl,
-)
 from johnathan_url_shortener.dependencies import get_dbsession
 from johnathan_url_shortener.services.unit_of_work import (
-    IUnitOfWork,
     SqlAlchemyUnitOfWork,
 )
 from johnathan_url_shortener.services.url.get import (
@@ -26,7 +22,7 @@ class URLToShorten(BaseModel):
 
 
 @shorten_url_router.post(
-    "/",
+    "",
     description="Register a shortened URL.",
 )
 def register_shortened_url(
