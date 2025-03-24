@@ -14,11 +14,25 @@ and preferably use your best virtualenv tool(I like to use [venv from builtin](h
 3. Install dependencies: `poetry install`
 4. Create a `.env` file on root project, containing:
 ```
-BLAH=blah
+DB_URL=postgresql://JUSDBUSER:JUSDBPASSWORD@jus-db:5432/jus
 ```
 
-5. Run for development: `make test` or `poetry run fastapi dev johnathan_url_shortener/main.py`
-6. Run for production: IN PROGRESS
+5. For build image, run:
+```shell
+make build
+```
+
+6. For up containers(app and database), run:
+```shell
+make up
+```
+
+7. To run all tests, run:
+```shell
+make test
+```
+
+8. Run for production: IN PROGRESS
 
 
 ### Useful tolls
