@@ -10,6 +10,10 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry install
 
-COPY ./johnathan_url_shortener ./johnathan_url_shortener
+COPY alembic.ini ./alembic.ini
+COPY johnathan_url_shortener ./johnathan_url_shortener
+COPY run.sh ./run.sh
 
-CMD ["poetry", "run", "uvicorn", "johnathan_url_shortener.main:app", "--host", "0.0.0.0", "--port", "8000"]
+RUN chmod +x ./run.sh
+
+CMD ["./run.sh"]

@@ -3,6 +3,7 @@ services:
     image: postgres
     restart: always
     environment:
+      POSTGRES_DB: "jus"
       POSTGRES_USER: "JUSDBUSER"
       POSTGRES_PASSWORD: "JUSDBPASSWORD"
     ports:
@@ -17,6 +18,8 @@ services:
       - "3331:8000"
     depends_on:
       - jus-db
+    environment:
+      DB_URL: "postgresql://JUSDBUSER:JUSDBPASSWORD@jus-db:5432/jus"
 
 networks:
   default:
