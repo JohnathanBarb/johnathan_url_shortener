@@ -1,14 +1,13 @@
 FROM python:3.13-alpine
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 
 RUN apk add build-base libpq libpq-dev
 
-RUN pip install poetry
+COPY pyproject.toml uv.lock ./
 
-COPY pyproject.toml poetry.lock ./
-
-RUN poetry install
+RUN uv sync
 
 COPY alembic.ini ./alembic.ini
 COPY johnathan_url_shortener ./johnathan_url_shortener

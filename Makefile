@@ -1,5 +1,5 @@
 run:
-	poetry run fastapi dev johnathan_url_shortener/main.py
+	uv run fastapi dev johnathan_url_shortener/main.py
 
 build:
 	docker build -t jus .
@@ -11,19 +11,19 @@ down:
 	docker compose down
 
 test:
-	poetry run pytest -s
+	uv run pytest -s
 
 utest:
-	poetry run pytest -s tests/unit
+	uv run pytest -s tests/unit
 
 itest:
-	poetry run pytest -s tests/integration
+	uv run pytest -s tests/integration
 
 etest:
-	poetry run pytest -s tests/e2e
+	uv run pytest -s tests/e2e
 
 format:
-	poetry run black .
+	uv run black .
 
 migrate:
-	poetry run alembic upgrade head
+	uv run alembic upgrade head

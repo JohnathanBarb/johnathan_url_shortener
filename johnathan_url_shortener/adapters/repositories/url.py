@@ -28,7 +28,7 @@ class SQLAlchemyShortenedURLRepositoryImpl(IShortenedURLRepository):
         # generate a token to be identifier to shortened url
 
         token_shortened_url = generate_token()
-        
+
         url_stmt = insert(URL).values(
             {
                 "token": token_shortened_url,

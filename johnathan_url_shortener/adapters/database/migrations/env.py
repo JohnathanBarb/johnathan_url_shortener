@@ -17,6 +17,7 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 from johnathan_url_shortener.adapters.database import *
+
 target_metadata = URL.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -56,7 +57,7 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    
+
     connectable = engine_from_config(
         {"sqlalchemy.url": get_settings().db_url},
         prefix="sqlalchemy.",
@@ -64,9 +65,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

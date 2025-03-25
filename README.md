@@ -9,9 +9,8 @@
 You need to have Python installed. This project was developed to use python 3.13
 
 1. Clone this repository
-2. This project uses Poetry to manage dependencies, see [how use it](https://python-poetry.org/docs/)
-and preferably use your best virtualenv tool(I like to use [venv from builtin](https://docs.python.org/3/library/venv.html));
-3. Install dependencies: `poetry install`
+2. This project uses UV to manage dependencies, see [how use it](https://docs.astral.sh/uv/getting-started/installation/)
+3. Install dependencies: `uv sync`
 4. Create a `.env` file on root project, containing:
 ```
 DB_URL=postgresql://JUSDBUSER:JUSDBPASSWORD@jus-db:5432/jus
